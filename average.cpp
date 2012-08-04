@@ -27,6 +27,7 @@ int main(int argc, char *argv[]) {
     }
   }
 
+  // TODO(hermannloose): Let user choose which file to work on.
   QImage input("input.png");
 
   if (!input.isGrayscale()) {
@@ -42,6 +43,7 @@ int main(int argc, char *argv[]) {
   QImage output(input);
   intImage intSum;
 
+  // TODO(hermannloose): Could be factored out into function.
   for (int y = 0; y < height; ++y) {
     for (int x = 0; x < width; ++x) {
       coordinate current(x, y);
@@ -82,22 +84,13 @@ int main(int argc, char *argv[]) {
     neighbours = (w + 1) * (w + 1);
   }
 
+  // TODO(hermannloose): Could be factored out into function.
   for (int y = 0; y < height; ++y) {
     for (int x = 0; x < width; ++x) {
       int left = max(0, x - (w / 2) - 1);
       int right = min(width - 1, x + (w / 2));
       int top = max(0, y - (w / 2) - 1);
       int bottom = min(height - 1, y + (w / 2));
-
-      /*
-      if ((top == bottom) && (top > 0)) {
-        --top;
-      }
-
-      if ((left == right) && (left > 0)) {
-        --left;
-      }
-      */
 
       unsigned long gray = 0;
 
@@ -125,6 +118,7 @@ int main(int argc, char *argv[]) {
     }
   }
 
+  // TODO(hermannloose): Let user choose filename, maybe append kernel size.
   if (!output.save("output.png")) {
     cerr << "Couldn't save image!" << endl;
   }
